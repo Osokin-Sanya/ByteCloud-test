@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script defer src="./mock-data.js"></script>
+    <script defer src="./script.js"></script>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="sliders">
+        <div class="slider">
+          <div class="wrapper">
+            <div class="storage">Storage:</div>
+            <div class="storage-value">1</div>
+          </div>
+          <div class="wrapper">
+            <div class="current-range">0</div>
+            <input
+              class="storage-range input-range"
+              data-range-type="storage"
+              type="range"
+              min="0"
+              max="1000"
+              value="0"
+            />
+            <div class="max-range">1000 GB</div>
+          </div>
+          <div class="wrapper">
+            <div class="transfer">Transfer:</div>
+            <div class="transfer-value">1</div>
+          </div>
+          <div class="wrapper">
+            <div class="current-range">0</div>
+            <input
+              class="transfer-range input-range"
+              data-range-type="transfer"
+              type="range"
+              min="0"
+              max="1000"
+              value="0"
+            />
+            <div class="max-range">1000 GB</div>
+          </div>
+        </div>
+      </div>
+      <div class="charts"></div>
+    </div>
+  </body>
+</html>
