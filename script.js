@@ -7,7 +7,6 @@ const storageValue = $(".storage-value");
 const transferValue = $(".transfer-value");
 const storageRange = $(".storage-range");
 const transferRange = $(".transfer-range");
-const chartItems = $(".charts");
 
 const state = {
   storageRangeValue: 0,
@@ -49,27 +48,29 @@ function createElementsControlOptions(
   companyName,
   optionsWrapper
 ) {
-  if (dataOptions) {
-    dataOptions.forEach((option) => {
-      const radio = createElem("input");
-      const label = createElem("label");
-      const span = createElem("span");
+  if (!dataOptions) return;
 
-      radio.type = "radio";
-      radio.name = companyName;
-      radio.className = "radio-options";
-      span.textContent = option.name;
-      radio.checked = "checked";
+  dataOptions.forEach((option) => {
+    const radio = createElem("input");
+    const label = createElem("label");
+    const span = createElem("span");
 
-      label.appendChild(radio);
-      label.appendChild(span);
+    radio.type = "radio";
+    radio.name = companyName;
+    radio.className = "radio-options";
+    span.textContent = option.name;
+    radio.checked = "checked";
 
-      optionsWrapper.appendChild(label);
-    });
-  }
+    label.appendChild(radio);
+    label.appendChild(span);
+
+    optionsWrapper.appendChild(label);
+  });
 }
 
-function moduleInitialization () {
+function moduleInitialization() {
+  const chartItems = $(".charts");
+
   Object.keys(providerDataArray).forEach((companyName) => {
     const providerProps = providerDataArray[companyName];
     const wrapper = createElementsControl(companyName, providerProps);
@@ -145,13 +146,18 @@ function updatePrice({ storageRangeValue, transferRangeValue }) {
       });
     }
 
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+
     const priceElement = $(`[data-price='${companyName}']`);
-    priceElement.textContent = price.toFixed(2) + "$";
+    priceElement.textContent = formatter.format(price);
 
     // CHANGE PRICE BAR WIDTH
 
     const priceBarElement = $(`[data-price-bar='${companyName}']`);
-    priceBarElement.style.width = `${price * 5}px`;
+    priceBarElement.style.width = `${price * 2}px`;
   });
 }
 
